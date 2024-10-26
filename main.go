@@ -4,6 +4,7 @@ import (
 	"client-conductor-worker/src"
 	"fmt"
 	"os/signal"
+	"runtime"
 	"strconv"
 	"strings"
 	"syscall"
@@ -56,6 +57,14 @@ func httpSettings() *settings.HttpSettings {
 
 func main() {
 
+	cpu, err := strconv.Atoi(os.Getenv("GOMAXPROCS"))
+	if err != nil {
+		log.Fatalf("Error: GOMAXPROCS env variable is not set %s", err)
+	}
+	runtime.GOMAXPROCS(cpu)
+
+	log.Println("GOMAXPROCS is set to:", runtime.GOMAXPROCS(0))
+
 	batchSizeS := os.Getenv("BATCH_SIZE")
 	if strings.TrimSpace(batchSizeS) == "" {
 		log.Fatal("Error: BATCH_SIZE env variable is not set")
@@ -64,6 +73,7 @@ func main() {
 	if err != nil {
 		log.Fatalf("Error: BATCH_SIZE env variable is not set")
 	}
+	log.Println("BATCH_SIZE is set to:", batchSizeS)
 
 	pollingTimeS := os.Getenv("POLLING_TIME")
 	if strings.TrimSpace(pollingTimeS) == "" {
@@ -73,6 +83,7 @@ func main() {
 	if err != nil {
 		log.Fatalf("Error: POLLING_TIME env variable is not a number: %v", err)
 	}
+	log.Println("BATCH_SIZE is set to:", pollingTimeS)
 
 	err = taskRunner.StartWorker("number", conductorworker.Number, batchSize, time.Duration(pollingTime)*time.Millisecond)
 	if err != nil {
