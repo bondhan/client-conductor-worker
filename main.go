@@ -83,7 +83,7 @@ func main() {
 	if err != nil {
 		log.Fatalf("Error: POLLING_TIME env variable is not a number: %v", err)
 	}
-	log.Println("BATCH_SIZE is set to:", pollingTimeS)
+	log.Println("POLLING_TIME is set to:", pollingTimeS)
 
 	err = taskRunner.StartWorker("number", conductorworker.Number, batchSize, time.Duration(pollingTime)*time.Millisecond)
 	if err != nil {
