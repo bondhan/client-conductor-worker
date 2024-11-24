@@ -4,6 +4,7 @@ import (
 	"math/rand"
 	"net/http"
 	"os"
+	"strconv"
 
 	"github.com/conductor-sdk/conductor-go/sdk/client"
 	"github.com/conductor-sdk/conductor-go/sdk/model"
@@ -50,11 +51,18 @@ func StartWorkflow(w http.ResponseWriter, r *http.Request) {
 	min := 5
 	max := 10
 
+	version := os.Getenv("WORKFLOW_VERSION")
+	ver, err := strconv.Atoi(version)
+	if err != nil {
+		log.Error("Error: WORKFLOW_VERSION env variable is not set")
+		os.Exit(1)
+	}
+
 	// Start the greetings workflow
 	id, err := workflowExecutor.StartWorkflow(
 		&model.StartWorkflowRequest{
 			Name:    "number_square_sleepms",
-			Version: 1,
+			Version: int32(ver),
 			Input: map[string]int{
 				"number": rand.Intn(max-min) + min,
 			},

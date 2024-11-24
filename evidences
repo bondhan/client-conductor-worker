@@ -1,0 +1,61 @@
+Trial 1:
+
+bondhan@BONDHAN-RYZEN5700G:/mnt/d/workspace/github/bondhan/client-conductor-worker/ab$ ab -n 1000 -c 100  http://192.168.100.188/server/start
+This is ApacheBench, Version 2.3 <$Revision: 1879490 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 192.168.100.188 (be patient)
+Completed 100 requests
+Completed 200 requests
+Completed 300 requests
+Completed 400 requests
+Completed 500 requests
+Completed 600 requests
+Completed 700 requests
+Completed 800 requests
+Completed 900 requests
+Completed 1000 requests
+Finished 1000 requests
+
+
+Server Software:        nginx/1.27.0
+Server Hostname:        192.168.100.188
+Server Port:            80
+
+Document Path:          /server/start
+Document Length:        0 bytes
+
+Concurrency Level:      100
+Time taken for tests:   17.275 seconds
+Complete requests:      1000
+Failed requests:        0
+Total transferred:      116000 bytes
+HTML transferred:       0 bytes
+Requests per second:    57.89 [#/sec] (mean)
+Time per request:       1727.526 [ms] (mean)
+Time per request:       17.275 [ms] (mean, across all concurrent requests)
+Transfer rate:          6.56 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0   10  97.7      0    1068
+Processing:     6 1412 2405.4     33    6895
+Waiting:        6 1412 2405.4     33    6895
+Total:          7 1422 2406.8     36    7407
+
+Percentage of the requests served within a certain time (ms)
+  50%     36
+  66%    302
+  75%    997
+  80%   4783
+  90%   5979
+  95%   6453
+  98%   6709
+  99%   6771
+ 100%   7407 (longest request)
+
+
+
+ Trial 2
+------------

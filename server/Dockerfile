@@ -2,6 +2,7 @@ FROM golang:1.23.0-alpine AS build-env
 
 LABEL maintainer="bondhan novandy<bondhan.novandy@gmail.com>"
 ARG CONDUCTOR_SERVER_URL
+ARG WORKFLOW_VERSION
 
 ENV APP_NAME=server
 ENV GO111MODULE=on
@@ -30,6 +31,7 @@ COPY . /src/server
 WORKDIR /src/server
 
 RUN echo "CONDUCTOR_SERVER_URL=${CONDUCTOR_SERVER_URL}" >> .env
+RUN echo "WORKFLOW_VERSION=${WORKFLOW_VERSION}" >> .env
 
 RUN ls -lah
 
